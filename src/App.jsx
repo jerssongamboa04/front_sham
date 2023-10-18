@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route, BrowserRouter , HashRouter} from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import AuthContext from './Context/AuthContext';
 import Home from './Pages/Home';
 import ProtectedRoute from './Components/ProtectedRoute';
@@ -15,44 +15,42 @@ import UserId from './Components/UserId';
 function App() {
   return (
     <div className="App">
-      <HashRouter>
-        <AuthContext>
-          <Header />
-          <Routes>
+      <AuthContext>
+        <Header />
+        <Routes>
 
-            <Route path="/" element={
-              <ProtectedRoute>
-                <Home />
-              </ProtectedRoute>} />
+          <Route path="/" element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>} />
 
-            <Route path="/ordenes" element={
-              <ProtectedRoute>
-                <WorkOrders />
-              </ProtectedRoute>} />
+          <Route path="/ordenes" element={
+            <ProtectedRoute>
+              <WorkOrders />
+            </ProtectedRoute>} />
 
-            <Route path="/incidents" element={
-              <ProtectedRoute>
-                <DailyIncidents />
-              </ProtectedRoute>} />
-
-
-            <Route path="/users" element={
-              <ProtectedRoute>
-                <Users />
-              </ProtectedRoute>} />
+          <Route path="/incidents" element={
+            <ProtectedRoute>
+              <DailyIncidents />
+            </ProtectedRoute>} />
 
 
-            <Route path="/users/user/:id" element={
-              <ProtectedRoute>
-                <UserId />
-              </ProtectedRoute>} />
+          <Route path="/users" element={
+            <ProtectedRoute>
+              <Users />
+            </ProtectedRoute>} />
 
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-          </Routes>
-          <Footer />
-        </AuthContext>
-      </HashRouter>
+
+          <Route path="/users/user/:id" element={
+            <ProtectedRoute>
+              <UserId />
+            </ProtectedRoute>} />
+
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+        <Footer />
+      </AuthContext>
     </div>
   );
 }
