@@ -14,7 +14,6 @@ const CreateIncident = () => {
     const [user_api, setUser_api] = useState();
     const [selectedPriority, setSelectedPriority] = useState('');
 
-    console.log(selectedPriority);
 
     const handleChange = ({ target: { name, value } }) => {
         if (name === 'priority') {
@@ -29,7 +28,7 @@ const CreateIncident = () => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const usersResponse = await fetchData(`http://localhost:8000/users/${user.email}`);
+                const usersResponse = await fetchData(`https://proyecto-sham-polar.vercel.app/users/${user.email}`);
                 if (usersResponse && usersResponse.result) {
                     const userData = usersResponse.result;
                     setUser_api(userData[0]);
@@ -50,7 +49,7 @@ const CreateIncident = () => {
         setError('');
         setCheck('');
         try {
-            const response = await fetch('http://localhost:8000/incidence', {
+            const response = await fetch('https://proyecto-sham-polar.vercel.app/incidence', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

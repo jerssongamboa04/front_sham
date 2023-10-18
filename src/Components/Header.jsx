@@ -27,7 +27,7 @@ const Header = () => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const usersResponse = await fetchData(`http://localhost:8000/users/${userEmail}`);
+                const usersResponse = await fetchData(`https://proyecto-sham-polar.vercel.app/users/${userEmail}`);
                 if (usersResponse && usersResponse.result) {
                     const userData = usersResponse.result;
                     setUser_api(userData[0]);

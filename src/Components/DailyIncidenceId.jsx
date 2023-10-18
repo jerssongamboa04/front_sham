@@ -10,7 +10,7 @@ const DailyIncidenceId = () => {
     const [dailyIncidenceId, setDailyIncidenceId] = useState([]);
 
     useEffect(() => {
-        fetchData(`http://localhost:8000/incidenceDaily/${user.email}`)
+        fetchData(`https://proyecto-sham-polar.vercel.app/incidenceDaily/${user.email}`)
             .then(async (res) => {
                 const data = await res.result;
                 if (data) {

@@ -23,7 +23,7 @@ const Register = () => {
         try {
             await signup(userRegister.email, userRegister.password);
 
-            const response = await fetch('http://localhost:8000/users', {
+            const response = await fetch('https://proyecto-sham-polar.vercel.app/users', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

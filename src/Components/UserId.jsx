@@ -12,7 +12,7 @@ const UserId = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const usersData = await fetchData(`http://localhost:8000/incidenceDaily/user/${id}`);
+                const usersData = await fetchData(`https://proyecto-sham-polar.vercel.app/incidenceDaily/user/${id}`);
                 const users = usersData.result;
 
                 setUserId(users);

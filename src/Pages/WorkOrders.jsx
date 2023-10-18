@@ -10,7 +10,7 @@ const WorkOrders = () => {
     const [WorkOrders, setWorkOrders] = useState();
 
     useEffect(() => {
-        fetchData('http://localhost:8000/incidence')
+        fetchData('https://proyecto-sham-polar.vercel.app/incidence')
             .then(async (res) => {
                 const data = await res.result;
                 if (data) {

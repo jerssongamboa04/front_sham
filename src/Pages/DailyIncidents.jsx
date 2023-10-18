@@ -23,7 +23,7 @@ const DailyIncidents = () => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const usersResponse = await fetchData(`http://localhost:8000/users/${user.email}`);
+                const usersResponse = await fetchData(`https://proyecto-sham-polar.vercel.app/users/${user.email}`);
                 if (usersResponse && usersResponse.result) {
                     const userData = usersResponse.result;
                     setUser_api(userData[0]);
@@ -44,7 +44,7 @@ const DailyIncidents = () => {
         setError('');
         setCheck('');
         try {
-            const response = await fetch('http://localhost:8000/incidenceDaily', {
+            const response = await fetch('https://proyecto-sham-polar.vercel.app/incidenceDaily', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
