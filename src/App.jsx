@@ -20,29 +20,29 @@ function App() {
           <Header />
           <Routes>
 
-            <Route path='/' element={
+            <Route path="/" element={
               <ProtectedRoute>
                 <Home />
               </ProtectedRoute>} />
 
-            <Route path='/ordenes' element={
+            <Route path="/ordenes" element={
               <ProtectedRoute>
                 <WorkOrders />
               </ProtectedRoute>} />
 
-            <Route path='/incidents' element={
+            <Route path="/incidents" element={
               <ProtectedRoute>
                 <DailyIncidents />
               </ProtectedRoute>} />
 
 
-            <Route path='/users' element={
+            <Route path="/users" element={
               <ProtectedRoute>
                 <Users />
               </ProtectedRoute>} />
 
 
-            <Route path='/users/user/:id' element={
+            <Route path="/users/user/:id" element={
               <ProtectedRoute>
                 <UserId />
               </ProtectedRoute>} />
