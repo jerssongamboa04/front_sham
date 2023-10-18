@@ -4,6 +4,7 @@ import logo from '../Static/logo.png';
 import { FaBars } from "react-icons/fa";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { fetchData } from '../Utilities/Utilities';
+import { Outlet } from 'react-router-dom';
 
 const Header = () => {
 
@@ -76,7 +77,7 @@ const Header = () => {
                     )}
                 </ul>
             )}
-
+            <Outlet />
         </header>
 
 

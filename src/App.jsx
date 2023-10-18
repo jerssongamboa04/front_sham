@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route, HashRouter } from 'react-router-dom';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import AuthContext from './Context/AuthContext';
 import Home from './Pages/Home';
 import ProtectedRoute from './Components/ProtectedRoute';
@@ -15,7 +15,7 @@ import UserId from './Components/UserId';
 function App() {
   return (
     <div className="App">
-      <HashRouter>
+      <BrowserRouter>
 
         <AuthContext>
           <Header />
@@ -53,7 +53,7 @@ function App() {
           </Routes>
           <Footer />
         </AuthContext>
-      </HashRouter>
+      </BrowserRouter>
 
     </div>
   );
