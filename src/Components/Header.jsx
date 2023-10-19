@@ -1,17 +1,19 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { UserContext } from '../Context/AuthContext';
 import logo from '../Static/logo.png';
 import { FaBars } from "react-icons/fa";
 import { AiFillCloseCircle } from "react-icons/ai";
-import { fetchData } from '../Utilities/Utilities';
+// import { fetchData } from '../Utilities/Utilities';
 import { Outlet } from 'react-router-dom';
 
 const Header = () => {
 
     const [clicked, setClicked] = useState(false);
     const { user } = useContext(UserContext);
-    const [user_api, setUser_api] = useState();
-    const userEmail = user?.email; // Usando verificación opcional
+    // const [user_api, setUser_api] = useState();
+    // const userEmail = user?.email; // Usando verificación opcional
+    // const isUserLoggedIn = user?.email && user_api?.token;
+
 
     const toggleDropdown = () => {
         setClicked(!clicked);
@@ -25,23 +27,23 @@ const Header = () => {
     ];
 
 
-    useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                const usersResponse = await fetchData(`https://proyecto-sham-polar.vercel.app/users/${userEmail}`);
-                if (usersResponse && usersResponse.result) {
-                    const userData = usersResponse.result;
-                    setUser_api(userData[0]);
-                } else {
-                    console.error('Error fetching users:', usersResponse);
-                }
-            } catch (error) {
-                console.error('Error fetching users:', error);
-            }
-        };
+    // useEffect(() => {
+    //     const fetchUser = async () => {
+    //         try {
+    //             const usersResponse = await fetchData(`https://proyecto-sham-polar.vercel.app/users/${userEmail}`);
+    //             if (usersResponse && usersResponse.result) {
+    //                 const userData = usersResponse.result;
+    //                 setUser_api(userData[0]);
+    //             } else {
+    //                 console.error('Error fetching users:', usersResponse);
+    //             }
+    //         } catch (error) {
+    //             console.error('Error fetching users:', error);
+    //         }
+    //     };
 
-        fetchUser();
-    }, [userEmail]);
+    //     fetchUser();
+    // }, [userEmail]);
 
 
     return (
@@ -52,7 +54,7 @@ const Header = () => {
                 <img className='w-24 h-24' src={logo} alt={'LogoPan'} />
             </div>
 
-            {user && user_api?.token && (
+            {user && (
                 <div className="ml-auto md:hidden">
                     {clicked ? (
                         <AiFillCloseCircle
@@ -65,7 +67,7 @@ const Header = () => {
                 </div>
             )}
 
-            {user && user_api?.token && (
+            {user && (
                 <ul className={` ml-auto md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-[#00246E] md:z-auto z-[-1] 
             left-0 w-full md:w-auto md:pl-0 pl-0 transition-all duration-500 ease-in ${clicked ? 'top-20 opacity-100' : 'top-[-490px]'}`} >
                     {Links.map((link) => (
