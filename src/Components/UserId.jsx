@@ -7,7 +7,6 @@ const UserId = () => {
     const { id } = useParams();
     const [userId, setUserId] = useState('');
 
-    console.log(userId);
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -47,13 +46,14 @@ const UserId = () => {
 
 
     return (
-        <section className='min-h-screen flex flex-col pt-32 md:pt-24 '>
+        <section className='2xl:my-8 min-h-screen flex flex-col pt-32 md:pt-24 '>
             {userId.length === 0 ? (
                 <div className='p-4'>No Tienes Incidencias, <Link to='/incidents'><button className='text-blue-900 font-bold p-1 hover:text-black hover:bg-blue-500 hover:rounded-lg 
             '>Comienza Ya!</button></Link></div>
 
             ) : <div>
-                <h1 className=" text-4xl md:my-6 font-bold md:text-5xl">Tus incidencias Diarias</h1>
+                <h2 className=" text-4xl md:my-6 font-bold md:text-5xl">incidencias Diarias</h2>
+                <h2 className='text-xl font-semibold text text-[#00246E] '>{capitalizeFirstLetter(userId[0].name)}</h2>
                 {userId ? (
                     <div className="flex flex-wrap items-center justify-center">
                         {userId.map((daily, i) => {

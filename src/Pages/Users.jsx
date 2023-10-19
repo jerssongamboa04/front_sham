@@ -31,7 +31,7 @@ const Users = () => {
 
     return (
 
-        <section className='min-h-screen flex flex-col pt-32 md:pt-24 '>
+        <section className='2xl:my-8 min-h-screen flex flex-col pt-32 md:pt-24 '>
             <h2 className="my-6 font-bold text-5xl">Usuarios</h2>
 
             {users ? (<div className="flex flex-wrap items-center justify-center">

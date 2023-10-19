@@ -81,7 +81,7 @@ const DailyIncidents = () => {
 
 
     return (
-        <section className='min-h-screen flex flex-col pt-32 md:pt-24 '>
+        <section className='2xl:my-8 min-h-screen flex flex-col pt-32 md:pt-24 '>
             {/* <h1 className=" text-4xl md:my-6 font-bold md:text-5xl">Incidencias Diarias</h1> */}
             <div className=" flex justify-center items-center flex-col ">
                 {error && <Alert message={error} />}

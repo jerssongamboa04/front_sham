@@ -39,7 +39,7 @@ const WorkOrders = () => {
     }
 
     return (
-        <section className='min-h-screen flex flex-col pt-32 md:pt-24 '>
+        <section className='2xl:my-8 min-h-screen flex flex-col pt-32 md:pt-24 '>
             <h1 className=" text-4xl md:my-6 font-bold md:text-5xl">Ordenes de Trabajo</h1>
             {WorkOrders ? (
                 <div className="flex flex-wrap items-center justify-center">
