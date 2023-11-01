@@ -20,7 +20,6 @@ const WorkOrders = () => {
                 if (usersResponse && usersResponse.result) {
                     const userData = usersResponse.result;
                     setUserApi(userData[0])
-                    console.log(userApi);
                 } else {
                     console.error('Error fetching users:', usersResponse);
                 }
