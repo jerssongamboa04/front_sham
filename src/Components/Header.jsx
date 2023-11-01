@@ -1,19 +1,14 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { UserContext } from '../Context/AuthContext';
 import logo from '../Static/logo.png';
 import { FaBars } from "react-icons/fa";
 import { AiFillCloseCircle } from "react-icons/ai";
-import { fetchData } from '../Utilities/Utilities';
 import { Outlet } from 'react-router-dom';
 
 const Header = () => {
 
     const [clicked, setClicked] = useState(false);
-    const { user, userApi } = useContext(UserContext);
-    const [user_api, setUser_api] = useState();
-    const userEmail = user?.email; // Usando verificación opcional
-    const isUserLoggedIn = user?.email && user_api?.token;
-
+    const { user } = useContext(UserContext);
 
     const toggleDropdown = () => {
         setClicked(!clicked);
@@ -25,26 +20,6 @@ const Header = () => {
         { name: "Incidencias", link: "/incidents" },
         { name: "Usuarios", link: "/users" },
     ];
-
-
-    // useEffect(() => {
-    //     const fetchUser = async () => {
-    //         try {
-    //             const usersResponse = await fetchData(`https://proyecto-sham-polar.vercel.app/users/${user.email}`);
-    //             if (usersResponse && usersResponse.result) {
-    //                 const userData = usersResponse.result;
-    //                 setUser_api(userData[0]);
-    //             } else {
-    //                 console.error('Error fetching users:', usersResponse);
-    //             }
-    //         } catch (error) {
-    //             console.error('Error fetching users:', error);
-    //         }
-    //     };
-
-    //     fetchUser();
-    // }, [user.email]);
-
 
     return (
 
