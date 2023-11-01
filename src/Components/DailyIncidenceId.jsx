@@ -2,12 +2,33 @@ import React, { useState, useContext, useEffect } from 'react';
 import { UserContext } from '../Context/AuthContext';
 import { fetchData } from '../Utilities/Utilities';
 import { Link } from "react-router-dom";
+import Header from '../Components/Header';
 
 
 
 const DailyIncidenceId = () => {
     const { user } = useContext(UserContext);
     const [dailyIncidenceId, setDailyIncidenceId] = useState([]);
+    const [user_api, setUser_api] = useState();
+
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const usersResponse = await fetchData(`https://proyecto-sham-polar.vercel.app/users/${user.email}`);
+                if (usersResponse && usersResponse.result) {
+                    const userData = usersResponse.result;
+                    setUser_api(userData[0]);
+                } else {
+                    console.error('Error fetching users:', usersResponse);
+                }
+            } catch (error) {
+                console.error('Error fetching users:', error);
+            }
+        };
+
+        fetchUser();
+    }, [user.email]);
 
     useEffect(() => {
         fetchData(`https://proyecto-sham-polar.vercel.app/incidenceDaily/${user.email}`)
@@ -43,6 +64,8 @@ const DailyIncidenceId = () => {
 
     return (
         <section className='mb-6'>
+            {user_api && user_api.token ? <Header /> : "..."}
+
             {dailyIncidenceId.length === 0 ? (
                 <div className='p-4'>No Tienes Incidencias, <Link to='/incidents'><button className='text-blue-900 font-bold p-1 hover:text-black hover:bg-blue-500 hover:rounded-lg 
                 '>Comienza Ya!</button></Link></div>
@@ -57,10 +80,11 @@ const DailyIncidenceId = () => {
                             return (
                                 <div key={i} className="flex-grow md:flex-grow-0 md:w-96 md:h-auto flex flex-col gap-4 text-center p-6 rounded-lg m-5 border-solid border-[1px] border-[#e3ded7] shadow-[rgba(0,0,0,0.1)0_4px_12px] transition ease-in-out delay-250 hover:shadow-[rgba(0,0,0,0.35)_0_5px_15px] hover:bg-slate-100">
                                     <div className='flex gap-5 items-center justify-between'>
-                                        <h2 className="font-bold text-xl">#{capitalizeFirstLetter(daily.daily_id)}</h2>
-                                        <h2 className={`font-bold text-lg px-2 py-1 rounded`}>
+                                        <h2 className={`font-bold text-lg px-2 py-1 rounded text-start`}>
                                             {capitalizeFirstLetter(daily.failure_daily)}
                                         </h2>
+                                        <h2 className="font-bold text-xl">#{capitalizeFirstLetter(daily.daily_id)}</h2>
+
                                     </div>
                                     <hr className="border-gray-300 w-full" />
 
@@ -69,15 +93,15 @@ const DailyIncidenceId = () => {
                                         <h2 className=" ">{capitalizeFirstLetter(daily.location_daily)} </h2>
                                     </div>
 
-                                    <div className='pr-8 flex justify_start gap-2 items-center'>
+                                    <div className='flex justify_start gap-2 items-center'>
                                         {/* <img src={configuraciones} alt='icons' className='w-6 h-6'></img> */}
                                         <h2 className="">{daily.description_daily}</h2>
                                     </div>
 
                                     <div className='pr-8 flex gap-2 justify_start items-center'>
                                         {/* <img src={mesa} alt='icons' className='w-6 h-6 mb-4'></img> */}
-                                        <div className='flex flex-col justify-start'>
-                                            <h2 className='text-left'>Tiempo de parada: {daily.downtime}</h2>
+                                        <div className='flex flex-col justify-start gap-1'>
+                                            <h2 className='text-left'>Tiempo de parada: {daily.downtime} Minutos</h2>
                                             <h2 className=" text-left font-semibold">{formattedStartDate}</h2>
                                         </div>
                                     </div>

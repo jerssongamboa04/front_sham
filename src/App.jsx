@@ -5,20 +5,19 @@ import Home from './Pages/Home';
 import ProtectedRoute from './Components/ProtectedRoute';
 import Login from './Pages/Login';
 import Register from './Pages/Register';
-import Header from './Components/Header';
 import Footer from './Components/Footer';
 import WorkOrders from './Pages/WorkOrders';
 import DailyIncidents from './Pages/DailyIncidents';
 import Users from './Pages/Users';
 import UserId from './Components/UserId';
+import HeaderLogin from './Components/HeaderLogin';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-
+        <HeaderLogin />
         <AuthContext>
-          <Header />
           <Routes>
 
             <Route path="/" element={
@@ -51,8 +50,8 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
           </Routes>
-          <Footer />
         </AuthContext>
+        <Footer />
       </BrowserRouter>
 
     </div>

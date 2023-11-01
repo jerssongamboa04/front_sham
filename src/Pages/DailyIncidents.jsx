@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import Alert from '../Components/Alert';
 import { fetchData } from '../Utilities/Utilities';
-
+import Header from '../Components/Header';
 import CheckMessage from '../Components/CheckMessage';
 import { UserContext } from '../Context/AuthContext';
 import DailyIncidenceId from '../Components/DailyIncidenceId';
@@ -82,7 +82,8 @@ const DailyIncidents = () => {
 
     return (
         <section className='2xl:my-8 min-h-screen flex flex-col pt-32 md:pt-24 '>
-            {/* <h1 className=" text-4xl md:my-6 font-bold md:text-5xl">Incidencias Diarias</h1> */}
+            {user_api && user_api.token ? <Header /> : "..."}
+
             <div className=" flex justify-center items-center flex-col ">
                 {error && <Alert message={error} />}
                 {check && <CheckMessage message={check} />}
@@ -98,7 +99,7 @@ const DailyIncidents = () => {
                         />
                     </div>
                     <div className="flex flex-col my-4 text-start focus:outline-none focus:shadow-outline">
-                        <input required placeholder='Tipo de falla'
+                        <input required placeholder='Equipo'
                             className="border rounded p-2"
                             type="text"
                             name="falla"

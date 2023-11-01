@@ -13,16 +13,19 @@ const CreateIncident = () => {
     const [check, setCheck] = useState();
     const [user_api, setUser_api] = useState();
     const [selectedPriority, setSelectedPriority] = useState('');
+    const [selectedLocation, setSelectedLocation] = useState('');
 
 
     const handleChange = ({ target: { name, value } }) => {
         if (name === 'priority') {
             setSelectedPriority(value);
-        } else {
+        } else if (name === "location") {
+            setSelectedLocation(value);
+        }
+        else {
             setIncidence({ ...incidence, [name]: value });
         }
     };
-
 
 
     useEffect(() => {
@@ -56,9 +59,9 @@ const CreateIncident = () => {
                 },
                 body: JSON.stringify(
                     {
-                        fault_location: incidence.localizacion,
+                        fault_location: selectedLocation,
                         failure: incidence.falla,
-                        priority_level: incidence.priority,
+                        priority_level: selectedPriority,
                         time_start: new Date().toISOString(),
                         user_id: user_api.user_id,
                         name: user_api.name,
@@ -93,16 +96,26 @@ const CreateIncident = () => {
                 <form onSubmit={handleIncidence} className="p-8 md:pb-12 my-8 md:w-3/6 bg-white flex flex-col border rounded-2xl md:px-20 shadow-[rgba(0,0,0,0.1)0_4px_12px] md:gap-2">
                     <h1 className=" md:m-2 font-bold md:text-4xl md:p-4 ">Nueva Orden</h1>
 
-                    <div className="flex flex-col my-4 text-start">
-                        <input required placeholder='Localizacion'
-                            className="border rounded p-2"
-                            type="text"
-                            name="localizacion"
-                            onChange={handleChange}
-                        />
-                    </div>
                     <div className="flex flex-col my-4 text-start focus:outline-none focus:shadow-outline">
-                        <input required placeholder='Tipo de falla'
+                        <select required
+                            id="location"
+                            name="location"
+                            value={selectedLocation}
+                            onChange={handleChange}
+                            className="border rounded p-2 "
+                        >
+                            <option className='' value="" disabled>Selecciona lugar</option>
+                            <option value="Zonas comunes">Zonas comunes</option>
+                            <option value="Obrador 0">Obrador 0</option>
+                            <option value="Obrador 1">Obrador 1</option>
+                            <option value="Obrador 2">Obrador 2</option>
+                            <option value="Obrador 3">Obrador 3</option>
+
+                        </select>
+                    </div>
+
+                    <div className="flex flex-col my-4 text-start focus:outline-none focus:shadow-outline">
+                        <input required placeholder='Equipo'
                             className="border rounded p-2"
                             type="text"
                             name="falla"

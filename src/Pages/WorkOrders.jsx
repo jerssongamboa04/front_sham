@@ -1,13 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { fetchData } from '../Utilities/Utilities';
 import adress from '../Static/adress.png'
 import mesa from '../Static/mesa.png'
 import configuraciones from '../Static/configuraciones.png'
+import { UserContext } from '../Context/AuthContext';
+import Header from '../Components/Header';
 
 
 const WorkOrders = () => {
+    const { user } = useContext(UserContext);
 
     const [WorkOrders, setWorkOrders] = useState();
+    const [userApi, setUserApi] = useState();
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const usersResponse = await fetchData(`https://proyecto-sham-polar.vercel.app/users/${user.email}`);
+                if (usersResponse && usersResponse.result) {
+                    const userData = usersResponse.result;
+                    setUserApi(userData[0])
+                    console.log(userApi);
+                } else {
+                    console.error('Error fetching users:', usersResponse);
+                }
+            } catch (error) {
+                console.error('Error fetching users:', error);
+            }
+        };
+
+        fetchUser();
+    }, [user.email]);
+
+
 
     useEffect(() => {
         fetchData('https://proyecto-sham-polar.vercel.app/incidence')
@@ -40,6 +65,8 @@ const WorkOrders = () => {
 
     return (
         <section className='2xl:my-8 min-h-screen flex flex-col pt-32 md:pt-24 '>
+            {userApi && userApi.token ? <Header /> : "..."}
+
             <h1 className=" text-4xl md:my-6 font-bold md:text-5xl">Ordenes de Trabajo</h1>
             {WorkOrders ? (
                 <div className="flex flex-wrap items-center justify-center">

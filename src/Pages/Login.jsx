@@ -7,11 +7,9 @@ import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
-    const {setEmailUser } = useContext(UserContext);
     const { user, setUser, login } = useContext(UserContext);
     const [error, setError] = useState();
     const navigate = useNavigate();
-
 
     const handleChange = ({ target: { name, value } }) => {
         setUser({ ...user, [name]: value });
@@ -22,7 +20,6 @@ const Login = () => {
         setError('');
         try {
             await login(user.email, user.password);
-            setEmailUser(user.email);
             sessionStorage.setItem('emailUser', user.email); // Guardar en sessionStorage
             navigate('/');
         } catch (error) {
@@ -58,7 +55,6 @@ const Login = () => {
                 <div className="flex justify-center items-center flex-col">
                     <button className="m-4 text-white mb-2 bg-black border rounded px-12 py-2 hover:bg-[#00246E]" type="submit">Login</button>
                     <hr className="border-gray-300 my-4 w-full" />
-                    {/* <button className='text-white bg-[#1f1815] px-2 border rounded flex text-center' onClick={handleGoogleSignin}><img className='w-8 h-8' src={googleLogo} alt="Google" /></button> */}
                 </div>
             </form>
             <Button url={user ? '/' : '/register'} content={user ? 'Ya tienes cuenta? Inicia sesion' : 'No tienes cuenta? Registrate'} className={'text-white bg-[#1f1815] m-6 p-4 px-10 border rounded hover:opacity-80'} />

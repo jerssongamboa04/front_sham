@@ -9,7 +9,7 @@ const AuthContext = ({ children }) => {
 
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [emailUser, setEmailUser] = useState('');
+    const [userApi, setUserApi] = useState(null); 
 
     const signup = (email, password) => {
         return new Promise((resolve, reject) => {
@@ -46,7 +46,7 @@ const AuthContext = ({ children }) => {
     }, []);
 
     return (
-        <UserContext.Provider value={{ user, setUser, signup, login, logout, loading, emailUser, setEmailUser }}>
+        <UserContext.Provider value={{ user, setUser, signup, login, logout, loading, userApi, setUserApi }}>
             {children}
         </UserContext.Provider>)
 }

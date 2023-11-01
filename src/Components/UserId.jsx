@@ -1,12 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchData } from '../Utilities/Utilities';
 import { Link } from "react-router-dom";
+import Header from '../Components/Header';
+import { UserContext } from '../Context/AuthContext';
+
 
 const UserId = () => {
     const { id } = useParams();
     const [userId, setUserId] = useState('');
+    const [user_api, setUser_api] = useState();
+    const { user } = useContext(UserContext);
 
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const usersResponse = await fetchData(`https://proyecto-sham-polar.vercel.app/users/${user.email}`);
+                if (usersResponse && usersResponse.result) {
+                    const userData = usersResponse.result;
+                    setUser_api(userData[0]);
+                } else {
+                    console.error('Error fetching users:', usersResponse);
+                }
+            } catch (error) {
+                console.error('Error fetching users:', error);
+            }
+        };
+
+        fetchUser();
+    }, [user.email]);
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -47,6 +69,8 @@ const UserId = () => {
 
     return (
         <section className='2xl:my-8 min-h-screen flex flex-col pt-32 md:pt-24 '>
+            {user_api && user_api.token ? <Header /> : "Cargando..."}
+
             {userId.length === 0 ? (
                 <div className='p-4'>No Tienes Incidencias, <Link to='/incidents'><button className='text-blue-900 font-bold p-1 hover:text-black hover:bg-blue-500 hover:rounded-lg 
             '>Comienza Ya!</button></Link></div>
@@ -74,9 +98,9 @@ const UserId = () => {
                                         <h2 className=" ">{capitalizeFirstLetter(daily.location_daily)} </h2>
                                     </div>
 
-                                    <div className='pr-8 flex justify_start gap-2 items-center'>
+                                    <div className=' flex justify_start gap-2 items-center'>
                                         {/* <img src={configuraciones} alt='icons' className='w-6 h-6'></img> */}
-                                        <h2 className="">{daily.description_daily}</h2>
+                                        <h2 className="text-left">{daily.description_daily}</h2>
                                     </div>
 
                                     <div className='pr-8 flex gap-2 justify_start items-center'>

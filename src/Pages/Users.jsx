@@ -1,12 +1,32 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { fetchData } from '../Utilities/Utilities';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../Context/AuthContext';
+import Header from '../Components/Header';
 
 const Users = () => {
 
     const [users, setUsers] = useState();
+    const { user } = useContext(UserContext);
+    const [userApi, setUserApi] = useState();
 
-    console.log(users);
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const usersResponse = await fetchData(`https://proyecto-sham-polar.vercel.app/users/${user.email}`);
+                if (usersResponse && usersResponse.result) {
+                    const userData = usersResponse.result;
+                    setUserApi(userData[0])
+                } else {
+                    console.error('Error fetching users:', usersResponse);
+                }
+            } catch (error) {
+                console.error('Error fetching users:', error);
+            }
+        };
+
+        fetchUser();
+    }, [user.email]);
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -32,6 +52,8 @@ const Users = () => {
     return (
 
         <section className='2xl:my-8 min-h-screen flex flex-col pt-32 md:pt-24 '>
+            {userApi && userApi.token ? <Header /> : "Cargando..."}
+
             <h2 className="my-6 font-bold text-5xl">Usuarios</h2>
 
             {users ? (<div className="flex flex-wrap items-center justify-center">
