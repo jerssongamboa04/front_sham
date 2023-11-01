@@ -30,7 +30,7 @@ const WorkOrders = () => {
         };
 
         fetchUser();
-    }, [user.email]);
+    }, [user]);
 
 
 
